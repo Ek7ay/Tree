@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>公共树页面</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/modules/metroStyle/metroStyle.css" />
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div class="pd-10 layui-bg-white">
+		<div class="layui-searchInput">
+			<span class="layui-icon layui-icon-search"></span>
+			<input type="text" id="fuzzySearch" class="layui-input" placeholder="搜索" />
+		</div>
+		<!--ztree 树-->
+		<ul id="treeDemo" class="ztree"></ul>
+</div>	
+<script src="../../layuiadmin/layui/jquery-1.11.3.min.js"></script>
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/lib/extend/jquery.ztree.all.min.js"></script>
+<script src="../../layuiadmin/lib/extend/jquery.ztree.exhide.js"></script>
+<script src="../../layuiadmin/lib/extend/fuzzysearch.js"></script>
+<script type="text/javascript">
+
+	var treeObj;
+	var setting = {
+	    data : {   
+	        simpleData : {
+	          enable : true, //设置启用简单数据格式[{id, pId, name}, {id, pId, name}]   
+		      idKey : "id",  //节点数据中保存唯一标识的属性名称
+		      pIdKey : "pId",  //节点数据中保存其父节点唯一标识的属性名称
+	          rootPId : null,  //根节点id
+	          type: "type"
+	        }
+	    },
+    	view: {
+			nameIsHTML: true, //允许name支持html				
+			selectedMulti: false
+		},
+		edit: {
+			enable: false,
+			editNameSelectAll: false
+		},
+	    check: {
+	        enable: true,   //复选框或单选框
+					autoCheckTrigger: true,   //事件回调函数
+					chkStyle: "checkbox",   //勾选框类型(checkbox 或 radio）
+					chkboxType: { "Y": "ps", "N": "ps" }   //勾选 checkbox 对于父子节点的关联关系
+	    },
+    	callback: {
+			onCheck: zTreeOnCheck
+		}
+  	};
+  /**标准数据格式*/
+    var zNodes =[
+        { name:"父节点1 - 展开", open:true,
+            children: [
+                { name:"父节点11 - 折叠",
+                    children: [
+                        { name:"叶子节点111"},
+                        { name:"叶子节点112"},
+                        { name:"叶子节点113"},
+                        { name:"叶子节点114"}
+                    ]},
+                { name:"父节点12 - 折叠",
+                    children: [
+                        { name:"叶子节点121"},
+                        { name:"叶子节点122"},
+                        { name:"叶子节点123"},
+                        { name:"叶子节点124"}
+                    ]},
+                { name:"父节点13 - 没有子节点", isParent:true}
+            ]},
+        { name:"父节点2 - 折叠",
+            children: [
+                { name:"父节点21 - 展开", open:true,
+                    children: [
+                        { name:"叶子节点211"},
+                        { name:"叶子节点212"},
+                        { name:"叶子节点213"},
+                        { name:"叶子节点214"}
+                    ]},
+                { name:"父节点22 - 折叠",
+                    children: [
+                        { name:"叶子节点221"},
+                        { name:"叶子节点222"},
+                        { name:"叶子节点223"},
+                        { name:"叶子节点224"}
+                    ]},
+            ]},
+        { name:"父节点3 - 没有子节点", isParent:true}
+
+    ];;
+   
+	$(document).ready(function(){
+	  treeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	  treeObj.expandAll(true); 
+	  fuzzySearch('treeDemo','#fuzzySearch',null,true); //初始化模糊搜索方法
+
+	});
+   
+   //	$(document).ready(function(){
+	//  var url = "${basePath}dept/getTreeData?type=2";
+	//  $.getJSON(url,function(result){
+	//      // 访问zTree方法通过数据初始化节点信息
+	//      zTree=$.fn.zTree.init($("#treeDemo"),setting,result);
+	//   });
+	//	});
+	
+	function zTreeOnCheck(e, treeId, treeNode) {
+		//do some
+	}	
+	/*设置选中的节点*/
+	function doSetSelectedNode(index){
+	    var userNames = "";
+	    // 1.获得选中的的节点对象
+	    var nodes = treeObj.getCheckedNodes(true);    // 与无复选框函数名有区别
+	    for (var i=0;i<nodes.length;i++) {
+	        // 2.只获取用户数据
+	        userNames += nodes[i].name + ";";
+	    }  
+	}
+	
+</script>
+</body>
+</html>

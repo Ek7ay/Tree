@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>跟踪进程</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="layui-bg-white">
+
+	<div class="layui-fluid layui-card">
+		<div class="layui-legend">
+			<span class="layui-legend-tit">图例：</span>				
+			<ul class="layui-legend-ul clearfix">
+				<li><img src="../../layuiadmin/style/res/icon-1.png" /><span>未处理</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-2.png" /><span>正在处理</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-3.png" /><span>待审核</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-4.png" /><span>异常</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-5.png" /><span>处理完成</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-6.png" /><span>退单</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-7.png" /><span>废弃工单</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-8.png" /><span>同步等待</span></li>
+				<li><img src="../../layuiadmin/style/res/icon-9.png" /><span>未派发</span></li>
+			</ul>
+		</div>
+		<p>流程实例图，点击节点查看工单(如遇综合激活平台异常单，请联系当地运维处理)</p>
+		<div class="layui-chart">
+			流程图展示区域
+		</div>
+	  	<div class="layui-tab">
+		  <ul class="layui-tab-title">
+		    <li class="layui-this">工单信息</li>
+		    <li>工单执行信息</li>
+		    <li>工单错误信息</li>
+		  </ul>
+		  <div class="layui-tab-content">
+		  	<div class="layui-tab-item layui-show">
+		  		<table id="LAY-index-topSearch" lay-filter="layTable" lay-size="sm"></table>
+		  	</div>
+		    <div class="layui-tab-item">内容2</div>
+		    <div class="layui-tab-item">内容3</div>
+		  </div>
+		</div>      
+	</div>
+
+  <script src="../../layuiadmin/layui/layui.js"></script>  
+  <script src="../../layuiadmin/modules/maintainOrder/flowPath.js"></script>
+
+</body>
+</html>

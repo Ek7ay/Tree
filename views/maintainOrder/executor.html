@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>选择审核人</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/modules/metroStyle/metroStyle.css" />
+  <style>
+	  	.layout-box {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 0;
+		}
+	  	.ping-se-box {
+			margin-right: 0 !important;
+		}
+		.ping-se-box .ping-se {
+			margin-right: 0;
+			width: 90px;
+		}
+		.ping-se-box .ping-se .layui-form-select dl dd {
+			line-height: 30px;
+		}
+		.ping-se-box .ping-se .layui-form-select dl dd.layui-this {
+			background-color: #038FE2;
+		}
+  		.ping-se .layui-input, .layui-select, .layui-textarea {
+			height: 30px;
+		}
+		.layui-searchInput {
+			flex: 1;
+			margin-right: 0 !important;
+		}
+		/*弹出层部分样式*/
+		#alert-content-box {
+			width: 100%;
+			height: 100%;
+			background: #00B83F;
+		}
+
+
+  </style>
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div class="pd-10 layui-bg-white layui-row">
+	<div class="layui-form layui-col-xs6 layui-col-sm6 layui-col-md6 pdr-5">
+
+		<div class="layui-form-item layout-box">
+			<div class="layui-inline ping-se-box">
+				<div class="layui-input-inline ping-se">
+					<select id="type" name="quiz" lay-filter="search_type">
+						<option value="per">人员</option>
+						<option value="dep">部门</option>
+					</select>
+				</div>
+			</div>
+			<div id="search" class="layui-searchInput layui-inline">
+				<span class="layui-icon layui-icon-search"></span>
+				<input type="text" id="fuzzySearch" class="layui-input" style="width: 100%" placeholder="搜索" />
+			</div>
+		</div>
+
+		<div class="layui-target mgt-5" style="height: 435px;">
+			<ul id="treeDemo" class="ztree"></ul>
+		</div>
+	</div>
+	<div class="layui-col-xs6 layui-col-sm6 layui-col-md6 pdl-5">
+		<div class="layui-title layui-title2 mgb-5">已选择的目标</div>
+		<!--已选择的目标-->
+		<div class="layui-target">
+			<ul id="saveNode" class="layui-saveNode">
+				
+			</ul>
+		</div>
+		
+		<div class="layui-title layui-title2 mgb-5">常用目标</div>
+		<!--添加常用-->
+		<div class="layui-target">
+				<ul id="commonNode" class="layui-saveNode">
+					
+				</ul>
+		</div>
+		
+	</div>
+</div>	
+<script src="../../layuiadmin/layui/jquery-1.11.3.min.js"></script>
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/lib/extend/jquery.ztree.all.min.js"></script>
+<script src="../../layuiadmin/lib/extend/jquery.ztree.exhide.js"></script>
+<script src="../../layuiadmin/lib/extend/fuzzysearch.js"></script>
+<script type="text/javascript">
+
+	layui.use(['form', 'layer'], function(){
+		var form = layui.form;
+		form.on('select(search_type)', function(data){
+			console.log(data.value);
+			switch (data.value) {
+				case "per":
+					$("#search input").unbind();
+					fuzzySearch('treeDemo','#fuzzySearch',null,true); //初始化模糊搜索方法
+					break;
+				case "dep":
+					$("#search input").on("click", function () {
+						console.log("触发open");
+						layui.layer.open({
+							title: "请选择部门",
+							type: 1,
+							area: ['600px','400px'],
+							content: '<div id="alert-content-box"><div id="alertTree" class="ztree"></div>' +
+									 '</div>',
+							success: function (layero, index) {
+								setTimeout(function () {
+									layui.layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
+										tips: 3
+									});
+								}, 500)
+							}
+						});
+					});
+					break;
+				default:
+					break;
+			}
+		});
+	});
+
+	// $("#depSearch").focus(function () {
+	// 	alert("获取焦点");
+	// });
+
+
+
+
+
+
+
+
+
+
+
+	var treeObj;
+	var setting = {
+    data : {   
+        simpleData : {
+          enable : true, //设置启用简单数据格式[{id, pId, name}, {id, pId, name}]   
+			    idKey : "id",  //节点数据中保存唯一标识的属性名称
+			    pIdKey : "pId",  //节点数据中保存其父节点唯一标识的属性名称
+        	rootPId : null,  //根节点id
+          type: "type"
+        }
+    },
+    view: {
+			nameIsHTML: true, //允许name支持html				
+			selectedMulti: false
+		},
+		edit: {
+			enable: false,
+			editNameSelectAll: false
+		},
+    check: {
+        enable: true,   //复选框或单选框
+				autoCheckTrigger: true,   //事件回调函数
+				chkStyle: "checkbox",   //勾选框类型(checkbox 或 radio）
+				chkboxType: { "Y": "", "N": "" }   //勾选 checkbox 对于父子节点的关联关系
+    },
+    callback: {
+			onCheck: zTreeOnCheck
+		}
+  };
+  var zNodes = [{"checked": false,"id": 2742,"name": "基础知识","open": true,"pId": 0,"seq": 62},
+				{"checked": false,"id": 2743,"name": "词汇","open": true,"pId": 2742,"seq": 0},
+				{"checked": false,"id": 2744,"name": "词汇22","open": true,"pId": 2742,"seq": 0},
+				{"checked": false,"id": 2722,"name": "词汇33","open": true,"pId": 2722,"seq": 0},
+				{"checked": false,"id": 2797,"name": "其他作文","open": true,"pId": 2793,"seq": 3}];
+   
+	$(document).ready(function(){
+	  treeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	  treeObj.expandAll(true); 
+	  fuzzySearch('treeDemo','#fuzzySearch',null,true); //初始化模糊搜索方法
+
+	});
+   
+   //	$(document).ready(function(){
+	//  var url = "${basePath}dept/getTreeData?type=2";
+	//  $.getJSON(url,function(result){
+	//      // 访问zTree方法通过数据初始化节点信息
+	//      zTree=$.fn.zTree.init($("#treeDemo"),setting,result);
+	//   });
+	//	});
+	
+	function zTreeOnCheck(e, treeId, treeNode) {
+		var ztreeLi ="<li id='"+treeNode.id+"'><span class='icon_folder_blue'></span><span class='layui_item_text' title="+treeNode.name+">"+treeNode.name+"</span><i class='layui-icon layui-icon-add-1' title='添加至常用'></i><i class='layui-icon layui-icon-close js_delete'></i></li>";
+		//判断是否选中
+		if(treeNode.checked){
+			$("#saveNode").append(ztreeLi);
+		} else {
+			for (var i=0;i<$("#saveNode li").length;i++) {
+        $("#saveNode li[id='"+treeNode.id+"']").remove();
+    	}
+		}
+		$('#saveNode .layui-icon-add-1').off("click").on('click',function(){
+			var eve = event || window.event; //获取事件对象
+			var objEle = eve.target || eve.srcElement; //获取document 对象的引用
+			
+	  	addCommonUse(objEle,$('#commonNode'))
+	  	return false;
+	 	})
+		$('.js_delete').off("click").on('click',function(){
+		  var treeObj = $.fn.zTree.getZTreeObj("treeDemo"),
+					checkedNodes = treeObj.getCheckedNodes(),//得到选中的节点
+						liDom = $(this).parent("li"),
+		    		liId = liDom.attr("id");
+			    		
+	        for(var k=0;k<checkedNodes.length;k++){
+            if(checkedNodes[k].id == liId){
+              treeObj.checkNode(checkedNodes[k]);//取消这个节点的勾选状态
+            }
+	        }
+
+	  	liDom.remove();
+	  })
+	}	
+	/*设置选中的节点*/
+	function doSetSelectedNode(index){
+    var userIds = "";
+    var userNames = "";
+    // 1.获得选中的的节点对象
+    var nodes = treeObj.getCheckedNodes(true);    // 与无复选框函数名有区别
+    for (var i=0;i<nodes.length;i++) {
+        // 2.只获取用户数据
+        userNames += nodes[i].name + ";";
+    }
+//  // 3.通过node节点数据更新页面内容(若此iframe的parent页面只有一个则不需要[0])
+//  parent[0].$("#userNames").val(userNames.substring(0, userNames.length -1));
+//  // 4.关闭弹框
+//  parent.layer.close(index);  
+	}
+	//添加至常用 
+	function addCommonUse(event,commonBox){
+		var itemText = event.previousSibling.innerText,
+				itemId = event.parentNode.id,
+				itemLi ="<li data-id='"+itemId+"'><div class='layui-unselect layui-form-checkbox' lay-skin='primary'><i class='layui-icon layui-icon-ok'></i></div><span class='layui_item_text' title='"+itemText+"'>"+itemText+"</span><i class='layui-icon layui-icon-close js_delete'></i></li>";
+					
+				
+				if(commonBox.find("li").length<1) {
+					commonBox.append(itemLi);
+					$(".layui-form-checkbox").addClass("layui-form-checked");
+				}else{
+					var found = false;
+					for (var i=0;i<commonBox.find("li").length;i++) {
+						if (itemId == commonBox.find("li").eq(i).attr("data-id")) {
+              found = true;
+              alert("已添加至常用")
+						}
+					}
+	        if(!found){
+	            commonBox.append(itemLi);
+	            $(".layui-form-checkbox").addClass("layui-form-checked");
+	        }					
+				}
+				//勾选多选常用添加到已选
+				$(".layui-form-checkbox").off("click").on('click',function(){
+					saveUse($(this));			  	
+			  })
+				$('.js_delete').off("click").on('click',function(){
+			  	$(this).parent("li").remove();
+			  })
+	}
+	//常用添加到已选
+	function saveUse(obj){
+		var comTxt = $(obj).next().text(),
+				comId = $(obj).parent().attr("data-id"),
+				saveLi = $("#saveNode li"),
+				comLi ="<li id='"+comId+"'><span class='icon_folder_blue'></span><span class='layui_item_text' title="+comTxt+">"+comTxt+"</span><i class='layui-icon layui-icon-close js_delete'></i></li>";
+  	
+  	//判断多选框选中状态
+  	if(!$(obj).hasClass("layui-form-checked")){
+  		//判断已选目标是否重复
+  		if(saveLi.length<1) {
+				$("#saveNode").append(comLi);
+				$(obj).addClass("layui-form-checked");
+			}else{
+	  		var tag = false;
+	  		for (var i=0;i<saveLi.length;i++) {
+					if (comId == saveLi.eq(i).attr("id")) {
+						tag = true;
+					}
+				}
+	  		if(!tag){
+		    	$("#saveNode").append(comLi);
+		    	$(obj).addClass("layui-form-checked");
+				}
+			}
+			
+  	}else{
+  		for (var i=0;i<$("#saveNode li").length;i++) {
+        $("#saveNode li[id='"+comId+"']").remove();
+    	}
+  		$(obj).removeClass("layui-form-checked");
+  	}
+	}
+</script>
+</body>
+</html>

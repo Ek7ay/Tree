@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>维护任务工单-催办</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="layui-bg-white">
+	<div class="layui-fluid">
+		<form class="layui-form layui-row layui-col-space10" action="" lay-filter="">
+			<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">类型</label>
+		        <div class="layui-input-block">
+		          <select name="reminder" lay-verify="">
+	                <option value="1" selected>催办</option>
+	              </select> 
+		        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">紧急程度</label>
+		        <div class="layui-input-block">
+		          <select name="urgency" lay-verify="">
+	                <option value="1" selected>紧急</option>
+	                <option value="1" selected>一般</option>	                
+	              </select> 
+		        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">是否需要回复</label>
+		        <div class="layui-input-block">
+		          <select name="whether" lay-verify="">
+	                <option value="1" selected>是</option>
+	                <option value="2" selected>否</option>
+	              </select> 
+		        </div>
+		    </div>
+		    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+		        <label class="layui-form-label">消息标题</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="7482-2342-1332" autocomplete="off" class="layui-input">
+		        </div>
+		    </div>
+		    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+		        <label class="layui-form-label">消息内容</label>
+		        <div class="layui-input-block">
+		          <textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+		        </div>
+		    </div>
+		</form>
+		<table id="LAY-reminder" lay-filter="layTfile" lay-size="sm"></table>
+	</div>
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script>
+//form 表单示例
+layui.use(['element','table'], function(){
+	var $ = layui.jquery
+		,table = layui.table
+		,element = layui.element;
+		
+		
+	table.render({
+      elem: '#LAY-reminder'
+      ,height: 'full'
+//    ,url: layui.setter.base + 'json/console/top-search.js' //模拟接口
+      ,page: true
+      ,cols: [[ //标题栏
+      		{type:'checkbox'}
+	      ,{field: 'name', title: '名称'}
+	      ,{field: 'type', title: '类型', width: 120}
+	    ]]
+      ,size:'sm'//控制表格样式
+      ,limit:'10'
+      ,data: [{
+	      "name": "赵元贤"
+	      ,"type": "人员"
+	    },{
+	      "name": "赵元贤"
+	      ,"type": "人员"
+	    },{
+	      "name": "赵元贤"
+	      ,"type": "人员"
+	    },{
+	      "name": "赵元贤"
+	      ,"type": "人员"
+	    },{
+	      "name": "赵元贤"
+	      ,"type": "人员"
+	    }]
+    });
+})
+</script>
+</body>
+</html>

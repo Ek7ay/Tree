@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="gb2312">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+	<title>登录页</title>
+	<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" />
+	<link rel="stylesheet" href="../layuiadmin/style/ui.css" />
+	<link rel="stylesheet" href="../layuiadmin/style/login.css" />
+	<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body id="login-body">
+	
+	<div class='login'>
+		<div class="login-head">
+			<img src="../layuiadmin/layui/images/login_logo.png" />
+		</div>
+	  <div class='login_fields'>
+	  	<form class="layui-form layui-form-pane" action="">
+		    <div class='login_fields__user layui-form-item'>
+		      <div class='icon'>
+		        <img alt="" src='../layuiadmin/layui/images/user.png'>
+		      </div>
+		      <input type="text" name="username" required="" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+		    </div>
+		    
+		    <div class='login_fields__password layui-form-item'>
+		      <div class='icon'>
+		        <img alt="" src='../layuiadmin/layui/images/key.png'>
+		      </div>
+		      <input type="password" name="password" required="" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+		    </div>
+		    
+		    <div class='login_fields__submit'>
+		      <button class="layui-btn" lay-submit="" lay-filter="demo2">登录</button>
+		    </div>
+		    <div class="clearfix"><a class="forgot" id="forgot">忘记密码？</a></div>
+		</form>
+	  </div>
+	  <div class='contact'>	  	
+	    <p><span class="kefu">客服热线</span><span class="kefu">13909910000－813014 (内线)</span><span class="kefu">13579941449</span></p>
+        <p><span class="kefu" style="margin-left:72px;">13999182124</span><span class="kefu">15699111021</span><span class="kefu">15795322796</span></p>
+	  </div>
+	</div>
+	<div class='authent'>
+	  <div class="loader">
+        <div class="loader-inner ball-clip-rotate-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        </div>
+	  <p>认证中...</p>
+	</div>
+	<div id="forgot-body" class="pd-10-20" style="display: none;">
+		<form class="layui-form" action="">
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">用户名</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">移动电话</label>
+		    <div class="layui-input-block">
+		      <input type="password" name="password" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+			
+		</form>
+	</div>
+	<script src="../layuiadmin/layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use(['layer','element','form'], function(){
+  			var $ = layui.jquery,
+		  	 layer = layui.layer,
+		  	 element = layui.element,
+		  	 form = layui.form;
+		  	 
+			  $("#login-body").css({
+			  	'width':$(window).width(),
+			  	'height':$(window).height()
+			  })
+			  //监听提交
+			  form.on('submit(demo2)', function(data){
+			    layer.alert(JSON.stringify(data.field), {
+			      title: '最终的提交信息'
+			    })
+			    return false;
+			  });
+			  
+			  $('#forgot').on("click",function(){
+				//通过这种方式弹出的层，每当它被选择，就会置顶。
+				layer.open({
+				  title:'找回密码',
+				  type: 1,	  
+				  shade: 0.1,
+				  area: ['400px', '260px'],
+				  maxmin:false,
+				  move:true,
+				  resize:false,
+				  btn: ['确定', '取消'],//只是为了演示
+		          yes: function(){
+			          
+			      },
+			      btn2: function(){
+		            layer.closeAll();
+		          },
+				  btnAlign: 'c',
+				  content: $('#forgot-body')
+				});
+			  })
+			$(document).keypress(function (e) {
+		        // 回车键事件  
+		        if (e.which == 13) {
+		            $('input[type="button"]').click();
+		        }
+		    });
+	        
+	   })
+    </script>
+</body>
+</html>

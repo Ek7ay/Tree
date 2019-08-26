@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>短信</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<div class="layui-fluid" id="layui-note">	
+	<div class="layui-card">
+      <div class="layui-card-body">
+      	<h2 class="layui-title">电话簿</h2>
+      	<div class="layui-row">
+      		<!--电话簿-->
+      		<div class="layui-col-md6 pdr-5">
+      				<div class="layui-card layui-card2">
+				        <div class="layui-card-header">电话簿</div>
+				        <div class="layui-card-body" style="height:256px;overflow: auto;">
+								    <ul id="layui-tree"></ul>
+								</div>
+					    </div>
+      				<div class="layui-col-sm12 layui-col-md12" align="center">
+				        <button class="layui-btn layui-btn-sm layui-btn-normal" data-type="pbadmin">管理电话簿</button>
+				  			<button class="layui-btn layui-btn-sm layui-btn-normal" data-type="phoneBook">选择电话簿</button>
+				      </div>
+      		</div>
+      		<div class="layui-col-md6 pdl-5">
+      			<table id="LAY-note-search" lay-filter="layTable" lay-size="sm"></table>
+      			
+      			<div class="layui-col-sm12 mgt-10 layui-col-md12" align="center">
+				  			<button class="layui-btn layui-btn-sm layui-btn-normal" data-type="choice">选择号码</button>
+				    </div>
+      		</div>
+      	</div>
+      	<h2 class="layui-title">发送短信</h2>
+      	<form class="layui-form layui-row layui-col-space10">
+			      <div class="layui-col-sm8 layui-col-md8">
+			        <label class="layui-form-label">发送号码</label>
+			        <div class="layui-input-block">
+			          	<input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+			          	<p class="layui-word-aux">多个号码请用“,”隔开</p>
+			        </div>
+			      </div>
+			      <div class="layui-col-sm8 layui-col-md8">
+			        <label class="layui-form-label">短信内容</label>
+			        <div class="layui-input-block">
+			          	<textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+			          	<p class="layui-word-aux">还剩<span id="wordNum">23</span>个字符可录入</p>
+			        </div>
+			      </div>
+			      <div class="layui-col-sm8 layui-col-md8">
+			        <label class="layui-form-label">签名</label>
+			        <div class="layui-input-inline">
+			          	<input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+			        </div>
+			        <button class="layui-btn layui-btn-sm layui-btn-normal" data-type="save">保存为模板</button>
+			      </div>
+			      
+			      <div class="layui-col-sm12 layui-col-md12" align="center">
+			        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="LAY-user-front-search">发送</button>
+			  			<button class="layui-btn layui-btn-primary">清空</button>
+			      </div>
+			</form>
+      </div>
+   	</div>
+</div>
+
+  <script src="../../layuiadmin/layui/layui.js"></script>
+  <script src="../../layuiadmin/modules/maintainOrder/note.js"></script>
+  
+  <script>
+  layui.config({
+    base: '../../layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index']);
+  </script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>维护工单详情</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <link rel="stylesheet" href="../../layuiadmin/style/ie8.css" media="all">
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="layui-bg-white" id="layui-message">
+	<!--头部-->
+	<div class="layui-message-header clearfix">
+		<ul class="layui-message-handle layui-nav fr">
+			<li class="js-operate" data-type="flowPath"><img src="../../layuiadmin/style/res/process.png" />跟踪</li>
+			<li class="js-operate" data-type="reminder"><img src="../../layuiadmin/style/res/supplier-features.png" />催办</li>
+			<li class="js-operate" data-type="tfileList"><img src="../../layuiadmin/style/res/rfq.png" />附件列表</li>
+			<li class="layui-nav-item" lay-unselect>
+				<a href="javascript:;"><img src="../../layuiadmin/style/res/skip.png" />导出</a>
+        <dl class="layui-nav-child">
+          <dd><a href="javascript:;">导出excel</a></dd>
+          <dd><a href="javascript:;">导出html</a></dd>
+        </dl>
+			</li>
+			<li><img src="../../layuiadmin/style/res/refresh.png" />刷新</li>
+		</ul>
+		<h4 class="layui-message-tit">维护任务工单详情</h4>
+	</div>
+	
+	<div class="layui-message-con" id="layui-message-con">
+
+		<h4 class="section js_section">基本信息</h4>
+		<form class="layui-form" id="restform" action="" lay-filter="wsw">
+			<div class="layui-row layui-col-space5">
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+	        <label class="layui-form-label">工单编号</label>
+	        <div class="layui-input-block">
+	          <input type="text" name="" value="7482-2342-1332" readonly autocomplete="off" class="layui-input">
+	        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+	        <label class="layui-form-label">填写时间</label>
+	        <div class="layui-input-block">
+	          <!--<input type="text" name="" value="2018-08-03 17:09" readonly class="layui-input">-->
+	          	<select name="interest" lay-verify="required" lay-filter="aihao">
+				        <option value=""></option>
+				        <option value="0">写作</option>
+				        <option value="1">阅读</option>
+				        <option value="2">游戏</option>
+				        <option value="3">音乐</option>
+				        <option value="4">旅行</option>
+				      </select>
+	        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		      <label class="layui-form-label">派单人</label>
+	        <div class="layui-input-block">
+	          <input type="text" name="" value="管理员" readonly autocomplete="off" class="layui-input">
+	        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+	        <label class="layui-form-label">联系方式</label>
+	        <div class="layui-input-block">
+	          <input type="text" name="" value="18923483923" readonly autocomplete="off" class="layui-input">
+	        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		      	<label class="layui-form-label">派单部门</label>
+	        <div class="layui-input-block">
+	          <input type="text" name="" value="sysadmin" readonly autocomplete="off" class="layui-input">
+	        </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">派单时间</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" readonly autocomplete="off" class="layui-input">
+			    </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">受理部门</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="中国移动通信公司" readonly autocomplete="off" class="layui-input">
+			    </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">是否影响用户业务</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" readonly autocomplete="off" class="layui-input"> 
+			    </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">任务类型</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="信令网" readonly="readonly" autocomplete="off" class="layui-input">
+			    </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">回复时限</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="2018-02-03 17:18:12" readonly autocomplete="off" class="layui-input"> 
+			    </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">紧急程度</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="一般" autocomplete="off" readonly class="layui-input">
+			    </div>
+		    </div>
+		    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		    	<label class="layui-form-label">回复需附件</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="否" autocomplete="off" readonly class="layui-input"> 
+			    </div>
+		    </div>
+		    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+		    	<label class="layui-form-label">工单主题</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="3244554676523" readonly autocomplete="off" readonly class="layui-input">
+			    </div>
+		    </div>
+		    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+		    	<label class="layui-form-label">工单内容</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="87654gfd" readonly autocomplete="off" class="layui-input">
+			    </div>
+		    </div>
+		    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+		    	<label class="layui-form-label">工单来源类型</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="" value="其他" readonly autocomplete="off" class="layui-input">
+			    </div>
+		    </div>
+		    
+		    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+		    	<button class="layui-btn" lay-submit="" lay-filter="wsw">立即提交</button>
+		    </div>
+			</div>
+		
+		</form>
+		<!--环节处理内容 s-->
+		<div class="layui-message-tit2" align="center">环节处理内容</div>
+		
+		<div class="layui-card layui-card2">
+        <div class="layui-card-header js_section js_unfold">派发</div>
+        <div class="layui-card-body layui-form layui-row layui-col-space5 js_unfold_con">
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">所属部门/人</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="系统管理员" readonly autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">执行流程角色</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="" readonly class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+				      <label class="layui-form-label">要求受理时间</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="管理员" readonly autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">要求回复时间</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">回复人</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="系统管理员" readonly autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">联系方式</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="13233343432,13909910000" readonly autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+				      	<label class="layui-form-label">处理结束时间</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="" value="2018-09-21 12:22:22" readonly autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+				    	<label class="layui-form-label">处理类型</label>
+					    <div class="layui-input-block">
+					      <input type="text" name="" value="审核" readonly autocomplete="off" class="layui-input">
+					    </div>
+				    </div>
+				    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+				    	<label class="layui-form-label">处理结果</label>
+					    <div class="layui-input-block">
+					      <input type="text" name="" value="无意见" readonly autocomplete="off" readonly class="layui-input">
+					    </div>
+				    </div>
+				    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+				    	<label class="layui-form-label">附件</label>
+					    <div class="layui-input-block">
+					      <input type="text" name="" value="其他" readonly autocomplete="off" class="layui-input">
+					    </div>
+				    </div>
+				</div>
+    </div>
+		
+		<div class="layui-card layui-card2">
+	    <div class="layui-card-header js_section js_unfold">审核</div>
+	    <div class="layui-card-body layui-form js_unfold_con">
+	    	<div class="layui-row layui-col-space5">
+	    		<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">所属部门/人</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="系统管理员" readonly autocomplete="off" class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">执行流程角色</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="" readonly class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			      <label class="layui-form-label">要求受理时间</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="管理员" readonly autocomplete="off" class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">要求回复时间</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">回复人</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="系统管理员" readonly autocomplete="off" class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+		        <label class="layui-form-label">联系方式</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="13233343432,13909910000" readonly autocomplete="off" class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			      	<label class="layui-form-label">处理结束时间</label>
+		        <div class="layui-input-block">
+		          <input type="text" name="" value="2018-09-21 12:22:22" readonly autocomplete="off" class="layui-input">
+		        </div>
+			    </div>
+			    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+			    	<label class="layui-form-label">处理类型</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="" value="审核" readonly autocomplete="off" class="layui-input">
+				    </div>
+			    </div>
+			    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+			    	<label class="layui-form-label">处理结果</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="" value="无意见" readonly autocomplete="off" readonly class="layui-input">
+				    </div>
+			    </div>
+			    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+			    	<label class="layui-form-label">附件</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="" value="其他" readonly autocomplete="off" class="layui-input">
+				    </div>
+			    </div>
+	    	</div>
+			    
+			  <!--模块折叠 s-->
+				<div class="layui-collapse mgt-10" lay-filter="test">
+				  
+				  <div class="layui-colla-item">
+				    <h2 class="layui-colla-title js_section">告警信息列表</h2>
+				    <div class="layui-colla-content layui-form layui-row layui-col-space5">
+				      	<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+					        <label class="layui-form-label">建单人</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="系统管理员" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+					        <label class="layui-form-label">建单人部门</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      <label class="layui-form-label">建单人联系方式</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="管理员" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+					        <label class="layui-form-label">网元层级</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+					        <label class="layui-form-label">网管告警流水号</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+					        <label class="layui-form-label">网管告警ID</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">故障处理相应级别</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">是否重大故障</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">告警逻辑分类</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">告警逻辑子类</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">是否影响业务</label>
+					        <div class="layui-input-block">
+					          <input type="checkbox" checked="" name="open" disabled lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">影响业务情况</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">故障发现方式</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">派单方式</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">告警来源系统名称</label>
+					        <div class="layui-input-block">
+					          <input type="text" name="" value="" readonly autocomplete="off" class="layui-input">
+					        </div>
+						    </div>
+						    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+						      	<label class="layui-form-label">是否上报集团</label>
+					        <div class="layui-input-block">
+					          <input type="checkbox" name="close" disabled lay-skin="switch" lay-text="是|否">
+					        </div>
+						    </div>
+				    </div>
+				  </div>
+				  <div class="layui-colla-item">
+				    <h2 class="layui-colla-title js_section">代维环节信息</h2>
+				    <div class="layui-colla-content">
+				    	<table id="LAY-taskDetails" lay-filter="layTable" lay-size="sm"></table>
+				    </div>
+				  </div>
+				</div>
+				<!--模块折叠 end-->  
+			    
+	    </div>
+	  </div>
+		
+	</div>
+	
+	<!--底部-->
+	<div class="layui-message-foot clearfix">
+		<div class="fr">
+			<span class="js-operate" data-type="manage">处理</span>
+			<span class="js-operate" data-type="make">重新发起</span>
+			<span class="js-operate" data-type="turnOver">移交</span>
+			<span class="js-operate" data-type="payout">派发</span>
+			<span class="js-operate" data-type="finish">完成</span>
+			<span class="js-operate" data-type="reject">驳回</span>
+		</div>
+	</div>
+
+
+<!--右侧 菜单-->
+<div class="sideToolbar" id="sideCatalog">
+	<div class="sideCatalog">
+    <div id="sideCatalog-sidebar" class="sideCatalog-sidebar">
+	    <div class="sideCatalog-sidebar-top"></div>
+	    <div class="sideCatalog-sidebar-bottom"></div>
+    </div>
+    <div class="sideCatalog-catalog">
+	    <dl id="catalogList">
+	        <dd class="side-item1 side-hover"><a title="基本信息" href="javascript:;">1、基本信息</a><span class="sideCatalog-dot"></span></dd>
+	        <dd class="side-item1"><a title="派发" href="javascript:;">2、派发</a><span class="sideCatalog-dot"></span></dd>
+	        <dd class="side-item1"><a title="审核" href="javascript:;">3、审核</a><span class="sideCatalog-dot"></span></dd>
+	        <dd class="side-item2"><a title="Request数据段" href="javascript:;">告警信息列表</a><span class="sideCatalog-dot"></span></dd>
+	        <dd class="side-item1"><a title="返回数据" href="javascript:;">4、代维环节信息</a><span class="sideCatalog-dot"></span></dd>
+	    </dl>
+    </div>
+	</div>
+</div>	
+
+<!--处理 模块s-->
+<div class="layui-mess-panel layui-anim-up">
+		
+		<div class="layui-panel-head">处理<div class="layui-panel-toggle js-operate" data-type="toggle"></div></div>
+		<div class="layui-panel-con layui-toggle-con" id="js_panel_height">
+				<div class="layui-form layui-row layui-col-space5" action="" lay-filter="">
+				    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+			        <label class="layui-form-label">处理人</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+			        <label class="layui-form-label">处理意见</label>
+			        <div class="layui-input-block">
+			          <select name="interest" lay-verify="required" lay-filter="aihao">
+					        <option value=""></option>
+					        <option value="0">写作</option>
+					        <option value="1">阅读</option>
+					        <option value="2">游戏</option>
+					        <option value="3">音乐</option>
+					        <option value="4">旅行</option>
+					      </select>
+			        </div>
+				    </div>
+				    
+				    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+				    	<label class="layui-form-label"><span class="layui-required">*</span>联系电话</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="cellphone" value="" lay-verify="phone" autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs8 layui-col-sm8 layui-col-md8">
+				    	<label class="layui-form-label"><span class="layui-required">*</span>处理结果</label>
+			        <div class="layui-input-block">
+			          <input type="text" name="remarks" placeholder="处理意见" value="" autocomplete="off" class="layui-input">
+			        </div>
+				    </div>
+				    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+				    	<a href="javascript:;" class="layui-btn layui-btn-normal layui-btn-sm js-operate" data-type="disposeIdea">选择处理意见</a>
+				    </div>
+				    <div class="layui-col-xs6 layui-col-sm6 layui-col-md8">
+				    	<label class="layui-form-label">上传附件</label>
+			        <div class="layui-input-block">
+			          <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" id="test-upload-type1"><i class="layui-icon layui-icon-upload"></i>上传文件</button>
+			        </div>
+				    </div>
+				  	<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" align="center">
+	              <button class="layui-btn layui-btn-normal" lay-submit lay-filter="setmyinfo">确认</button>
+	              <button type="reset" class="layui-btn layui-btn-primary js_mask_close">取消</button>
+		        </div>
+				</div>
+		</div>
+</div>
+<!--处理 模块end-->
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/modules/maintainOrder/taskDetails.js"></script>
+
+</body>
+</html>

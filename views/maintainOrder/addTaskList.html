@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>新建维护任务工单</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/ui.css" media="all">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="../../layuiadmin/lib/extend/html5.min.js"></script>
+	  <script src="../../layuiadmin/lib/extend/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<div class="layui-fluid" id="LAY-addTaskList">
+	<div class="layui-card">
+      <div class="layui-card-header">新建维护任务工单</div>
+      <div class="layui-card-body">
+			<!--搜索条件 -->
+			<form class="layui-form layui-row layui-col-space10">
+				<div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">导入工单编号</label>
+			        <div class="layui-input-block">
+			          	<input type="text" name="orderTheme" placeholder="请输入" autocomplete="off" class="layui-input">		          
+			        </div>
+		      	</div>
+		      	<div class="layui-col-sm8 layui-col-md8">
+		      		<a href="javascript:;" class="layui-btn layui-btn-sm layui-btn-normal">确认</a>
+		      		<a href="javascript:;" class="layui-btn layui-btn-sm js_choice layui-btn-warm"  data-type="powerSearch">高级查询</a>
+		      		<span class="layui-hint">(申请单信息按此工单信息填写)</span>
+		      	</div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">派单人</label>
+		            <div class="layui-input-block">
+		              <input type="text" name="" value="刘翔" readonly class="layui-input">
+		            </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">联系方式</label>
+		            <div class="layui-input-block">
+		              <input type="text" name="" placeholder="" class="layui-input">
+		            </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">派单部门</label>
+		            <div class="layui-input-block">
+		              <input type="text" name="" value="网络中心" readonly class="layui-input">
+		            </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">派单时间</label>
+			        <div class="layui-input-block">
+			          	<input type="text" name="starDate" id="starDate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>任务类型</label>
+		            <div class="layui-input-block">
+		              <select name="role" lay-verify="">
+		                <option value="1" selected>超级管理员</option>
+		                <option value="2" disabled>普通管理员</option>
+		                <option value="3" disabled>审核员</option>
+		                <option value="4" disabled>编辑人员</option>
+		              </select> 
+		            </div>
+			      </div>
+			      
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label">回复时限</label>
+			        <div class="layui-input-block">
+			          	<input type="text" name="endDate" id="endDate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			        </div>
+			      </div>
+			      
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>受理部门</label>
+			        <div class="layui-input-block relative">
+		              	<input type="text" name="ticket" placeholder="" autocomplete="off" class="layui-input">
+		              	<span class="layui-choice js_choice" data-type="choice">选择</span>
+		              </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>审核人</label>
+			        <div class="layui-input-block relative">
+		              	<input type="text" name="ticket" autocomplete="off" class="layui-input" id="userNames" />
+		              	<span class="layui-choice js_choice" data-type="executor">选择</span>
+		              </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>影响用户业务</label>
+			        <div class="layui-input-block relative">
+		              	<input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
+		              </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>工单来源</label>
+			        <div class="layui-input-block">
+			          	<input type="text" name="" placeholder="" autocomplete="off" class="layui-input">
+			        </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>紧急程度</label>
+		            <div class="layui-input-block">
+		              <select name="role" lay-verify="">
+		                <option value="1" selected>一般</option>
+		                <option value="2" disabled>较急</option>
+		                <option value="3" disabled>紧急</option>
+		              </select> 
+		            </div>
+			      </div>
+			      <div class="layui-col-sm4 layui-col-md4">
+			        <label class="layui-form-label"><span class="layui-required">*</span>回复需附件</label>
+			        <div class="layui-input-block relative">
+		              	<input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
+		              </div>
+			      </div>
+			      <div class="layui-col-sm8 layui-col-md8">
+			        <label class="layui-form-label">工单主题(100字)</label>
+			        <div class="layui-input-block">
+			          	<input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+			        </div>
+			      </div>
+			      <div class="layui-col-sm8 layui-col-md8">
+			        <label class="layui-form-label">工单内容</label>
+			        <div class="layui-input-block">
+			          	<textarea name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+			        </div>
+			      </div>
+			      <div class="layui-col-sm8 layui-col-md8">
+			        <label class="layui-form-label">上传附件</label>
+			        <div class="layui-input-block">
+			          	<button type="button" class="layui-btn layui-btn-normal" id="test-upload-type1"><i class="layui-icon layui-icon-upload"></i>上传文件</button>
+			        </div>
+			      </div>
+			      
+			      <div class="layui-col-sm12 layui-col-md12" align="center">
+			        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="LAY-user-front-search">确认</button>
+			        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="">保存并提交</button>
+			        
+			  			<button class="layui-btn layui-btn-primary">取消</button>
+			      </div>
+			</form>
+		</div>
+	</div>
+</div>
+
+  <script src="../../layuiadmin/layui/layui.js"></script>  
+  <script src="../../layuiadmin/modules/maintainOrder/addTaskList.js" charset="GB2312"></script>
+   <script>
+  layui.config({
+    base: '../../layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use('index');
+  </script>
+</body>
+</html>
