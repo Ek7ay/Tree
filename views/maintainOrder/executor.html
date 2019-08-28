@@ -39,10 +39,25 @@
 		#alert-content-box {
 			width: 100%;
 			height: 100%;
-			background: #00B83F;
 		}
-
-
+		#alert-content-box .internal {
+			height: 300px;
+			overflow-y: scroll;
+			overflow-x: auto;
+		}
+		#alert-content-box .btnBox {
+			height: 46px;
+			line-height: 46px;
+		}
+		#alert-content-box .btnBox button {
+			padding: 0 25px;
+		}
+		#alert-content-box .btnBox button:first-child {
+			margin-left: 190px;
+		}
+		#alert-content-box .btnBox button:last-child {
+			margin-left: 70px;
+		}
   </style>
   <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 	<!--[if lt IE 9]>
@@ -81,7 +96,7 @@
 				
 			</ul>
 		</div>
-		
+
 		<div class="layui-title layui-title2 mgb-5">常用目标</div>
 		<!--添加常用-->
 		<div class="layui-target">
@@ -115,9 +130,44 @@
 							title: "请选择部门",
 							type: 1,
 							area: ['600px','400px'],
-							content: '<div id="alert-content-box"><div id="alertTree" class="ztree"></div>' +
+							content: '<div id="alert-content-box">' +
+										'<ul id="internal" class="ztree internal"></ul>' +
+										'<div class="btnBox">' +
+											'<button type="button" class="layui-btn layui-btn-normal layui-btn-sm">确定</button>' +
+											'<button type="button" class="layui-btn layui-btn-normal layui-btn-sm">取消</button>' +
+										'</div>' +
 									 '</div>',
 							success: function (layero, index) {
+								var option = {
+									data: {
+										simpleData: {
+											enable: true
+										}
+									}
+								};
+								var data =[
+									{ id:1, pId:0, icon:"../img/right.png", name:"区公司/网络部", url:"", target:"_blank"},
+									{ id:2, pId:0, icon:"../img/book.png", name:"区公司/网络部/网络部领导", url:"", target:"_blank"},
+									{ id:3, pId:0, icon:"../img/book.png", name:"喀什分公司/网络部", url:"", target:"_blank"},
+									{ id:4, pId:0, icon:"../img/book.png", name:"哈密分公司/网络部", url:"", target:"_blank", click:"console.log('我是不会跳转的...')"},
+									{ id:5, pId:0, icon:"../img/book.png", name:"阿克苏分公司/网络部", url:"", target:"_blank"},
+									{ id:6, pId:0, icon:"../img/book.png", name:"阿勒泰分公司/网络部", url:"", target:"_blank"},
+									{ id:7, pId:0, icon:"../img/book.png", name:"克州分公司/网络部", url:"", target:"_blank"},
+									{ id:8, pId:0, icon:"../img/book.png", name:"博州分公司/网络部", url:"", target:"_blank"},
+									{ id:9, pId:0, icon:"../img/book.png", name:"昌古分公司/网络部", url:"", target:"_blank"},
+									{ id:10, pId:0, icon:"../img/book.png", name:"克拉玛依分公司/网络部", url:"", target:"_blank"},
+									{ id:11, pId:0, icon:"../img/book.png", name:"奎屯分公司/网络部", url:"", target:"_blank"},
+									{ id:12, pId:0, icon:"../img/book.png", name:"石河子分公司/网络部", url:"", target:"_blank"},
+									{ id:13, pId:0, icon:"../img/book.png", name:"塔城分公司/网络部", url:"", target:"_blank"},
+									{ id:14, pId:0, icon:"../img/book.png", name:"吐鲁番分公司/网络部", url:"", target:"_blank"},
+									{ id:15, pId:0, icon:"../img/book.png", name:"奎屯分公司/网络部", url:"", target:"_blank"},
+									{ id:16, pId:0, icon:"../img/book.png", name:"石河子分公司/网络部", url:"", target:"_blank"},
+									{ id:17, pId:0, icon:"../img/book.png", name:"塔城分公司/网络部", url:"", target:"_blank"},
+									{ id:18, pId:0, icon:"../img/book.png", name:"吐鲁番分公司/网络部", url:"", target:"_blank"},
+								];
+								$(document).ready(function(){
+									$.fn.zTree.init($("#internal"), option, data);
+								});
 								setTimeout(function () {
 									layui.layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
 										tips: 3
@@ -132,6 +182,8 @@
 			}
 		});
 	});
+
+
 
 
 

@@ -12,9 +12,7 @@
 
 <BODY>
 
-	<div class="zTreeDemoBackground">
-		<ul id="treeDemo" class="ztree"></ul>
-	</div>
+<ul id="internal" class="ztree"></ul>
 
 	<SCRIPT type="text/javascript">
 
@@ -27,14 +25,24 @@
 		};
 
 		var data =[
-			{ id:1, pId:0, name:"zTree Home", url:"", target:"_blank"},
-			{ id:2, pId:0, name:"zTree in Google", url:"", target:"_blank"},
-			{ id:3, pId:0, name:"zTree in Iteye", url:"", target:"_blank"},
-			{ id:4, pId:0, name:"Nothing...", url:"", target:"_blank", click:"alert('我是不会跳转的...');"}
+			{ id:1, pId:0, icon:"css/zTreeStyle/img/right.png", name:"区公司/网络部", url:"", target:"_blank"},
+			{ id:2, pId:0, icon:"css/zTreeStyle/img/book.png", name:"区公司/网络部/网络部领导", url:"", target:"_blank"},
+			{ id:3, pId:0, icon:"css/zTreeStyle/img/book.png", name:"喀什分公司/网络部", url:"", target:"_blank"},
+			{ id:4, pId:0, icon:"css/zTreeStyle/img/book.png", name:"哈密分公司/网络部", url:"", target:"_blank", click:"console.log('我是不会跳转的...')"},
+			{ id:5, pId:0, icon:"css/zTreeStyle/img/book.png", name:"阿克苏分公司/网络部", url:"", target:"_blank"},
+			{ id:6, pId:0, icon:"css/zTreeStyle/img/book.png", name:"阿勒泰分公司/网络部", url:"", target:"_blank"},
+			{ id:7, pId:0, icon:"css/zTreeStyle/img/book.png", name:"克州分公司/网络部", url:"", target:"_blank"},
+			{ id:8, pId:0, icon:"css/zTreeStyle/img/book.png", name:"博州分公司/网络部", url:"", target:"_blank"},
+			{ id:9, pId:0, icon:"css/zTreeStyle/img/book.png", name:"昌古分公司/网络部", url:"", target:"_blank"},
+			{ id:10, pId:0, icon:"css/zTreeStyle/img/book.png", name:"克拉玛依分公司/网络部", url:"", target:"_blank"},
+			{ id:11, pId:0, icon:"css/zTreeStyle/img/book.png", name:"奎屯分公司/网络部", url:"", target:"_blank"},
+			{ id:12, pId:0, icon:"css/zTreeStyle/img/book.png", name:"石河子分公司/网络部", url:"", target:"_blank"},
+			{ id:13, pId:0, icon:"css/zTreeStyle/img/book.png", name:"塔城分公司/网络部", url:"", target:"_blank"},
+			{ id:14, pId:0, icon:"css/zTreeStyle/img/book.png", name:"吐鲁番分公司/网络部", url:"", target:"_blank"},
 		];
 
 		$(document).ready(function(){
-			$.fn.zTree.init($("#treeDemo"), option, data);
+			$.fn.zTree.init($("#internal"), option, data);
 		});
 
 	</SCRIPT>
