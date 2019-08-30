@@ -40,39 +40,28 @@
 			width: 100%;
 			height: 100%;
 		}
-		#alert-content-box .checkAllBox {
-			height: 20px;
-			line-height: 20px;
-			padding-left: 44px;
-		}
-		#alert-content-box .checkAllBox input {
-			margin-right: 25px;
-			position: relative;
-			top: 2px;
-			width: 12px;
-			background-color: #ffffff;
-		}
-		#alert-content-box .checkAllBox input[type="checkbox"]::before{
-			background-color: #3366FF;
-		}
 		#alert-content-box .internal {
 			padding: 0 5px 5px 20px;
-			height: 260px;
+			height: 304px;
 			overflow-y: scroll;
 			overflow-x: auto;
 		}
 		#alert-content-box .btnBox {
-			height: 46px;
+			height: 48px;
 			line-height: 46px;
+			background-color: #EEEEEE;
 		}
-		#alert-content-box .btnBox button {
+		#alert-content-box .btnBox .sub {
 			padding: 0 25px;
 		}
 		#alert-content-box .btnBox button:first-child {
-			margin-left: 190px;
+			margin-left: 30px;
+		}
+		#alert-content-box .btnBox button:nth-child(2) {
+			margin-left: 270px;
 		}
 		#alert-content-box .btnBox button:last-child {
-			margin-left: 70px;
+			margin-left: 20px;
 		}
   </style>
   <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -133,25 +122,25 @@
 	layui.use(['form', 'layer'], function(){
 		var form = layui.form;
 		form.on('select(search_type)', function(data){
-			console.log(data.value);
 			switch (data.value) {
 				case "per":
 					$("#search input").unbind();
 					fuzzySearch('treeDemo','#fuzzySearch',null,true); //初始化模糊搜索方法
 					break;
 				case "dep":
+					$("#search input").unbind();
 					$("#search input").on("click", function () {
 						console.log("触发open");
-						layui.layer.open({
+					    var index=layui.layer.open({
 							title: "请选择部门",
 							type: 1,
 							area: ['600px','400px'],
 							content: '<div id="alert-content-box">' +
-										'<div class="checkAllBox"><input type="checkbox">全选</div>' +
 										'<ul id="internal" class="ztree internal"></ul>' +
 										'<div class="btnBox">' +
-											'<button type="button" id="edit" class="layui-btn layui-btn-normal layui-btn-sm">确定</button>' +
-											'<button type="button" class="layui-btn layui-btn-normal layui-btn-sm">取消</button>' +
+											'<button type="button" id="edit" class="layui-btn layui-btn-normal layui-btn-sm">全选</button>' +
+											'<button type="button" id="confirm" class="layui-btn layui-btn-normal layui-btn-sm sub">确定</button>' +
+											'<button type="button" id="complete" class="layui-btn layui-btn-normal layui-btn-sm sub">取消</button>' +
 										'</div>' +
 									 '</div>',
 							success: function (layero, index) {
@@ -168,6 +157,7 @@
 								};
 								var data =[
 									{ id:1, pId:0, icon:"../img/right.png", name:"区公司/网络部", url:"", target:"_blank"},
+									{"checked": false,"id": 2743,"name": "词汇","open": true,"pId": 2742,"seq": 0},
 									{ id:2, pId:0, icon:"../img/book.png", name:"区公司/网络部/网络部领导", url:"", target:"_blank"},
 									{ id:3, pId:0, icon:"../img/book.png", name:"喀什分公司/网络部", url:"", target:"_blank"},
 									{ id:4, pId:0, icon:"../img/book.png", name:"哈密分公司/网络部", url:"", target:"_blank", click:"console.log('我是不会跳转的...')"},
@@ -197,14 +187,33 @@
 									status === true ? status = false : status = true;
 									internalObj.checkAllNodes(status);
 								});
-
-
-
-								setTimeout(function () {
-									layui.layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
-										tips: 3
+								// 点击取消按钮
+								$("#complete").on("click", function () {
+									layer.close(index);
+								});
+								// 点击确定按钮
+								$("#confirm").on("click", function () {
+									var nodes = internalObj.getCheckedNodes(true);
+									console.log(nodes);
+									var newNodes = "";
+									nodes.forEach(function (item) {
+										newNodes += "<li id='" + item.id+ "'><span class='icon_folder_blue'></span><span class='layui_item_text' title="+item.name+">"+item.name+"</span><i class='layui-icon layui-icon-add-1' title='添加至常用'></i><i class='layui-icon layui-icon-close js_delete'></i></li>";
 									});
-								}, 500)
+									$("#saveNode").append(newNodes);
+									// 在此绑定放入已选择目标后取消事件
+									$('.js_delete').off("click").on('click',function(){
+										var liDom = $(this).parent("li");
+										liDom.remove();
+									});
+									//调用添加到常用方法
+									$('#saveNode .layui-icon-add-1').off("click").on('click',function(){
+										var eve = event || window.event; //获取事件对象
+										var objEle = eve.target || eve.srcElement; //获取document 对象的引用
+										addCommonUse(objEle,$('#commonNode'));
+										return false;
+									})
+									layer.close(index);    //关闭弹出框
+								})
 							}
 						});
 					});
@@ -339,8 +348,8 @@
 					var found = false;
 					for (var i=0;i<commonBox.find("li").length;i++) {
 						if (itemId == commonBox.find("li").eq(i).attr("data-id")) {
-              found = true;
-              alert("已添加至常用")
+						  found = true;
+						  alert("已添加至常用")
 						}
 					}
 	        if(!found){
